@@ -12,6 +12,12 @@
         android:theme="@style/Theme.Staff_invitation"
         tools:targetApi="31">
         <activity
+            android:name=".CreateEvent"
+            android:exported="false" />
+        <activity
+            android:name=".EditEvent"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

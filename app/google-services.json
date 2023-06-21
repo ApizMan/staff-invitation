@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1090408016145",
+    "firebase_url": "https://login-2e102-default-rtdb.firebaseio.com",
+    "project_id": "login-2e102",
+    "storage_bucket": "login-2e102.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090408016145:android:b20e859fba11a27d1d04b0",
+        "android_client_info": {
+          "package_name": "com.example.staff_invitation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090408016145-2f73lht7bhuhq25led85ctnr13dom67k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxX0Cjwr3dkhzvviuNNV5463rH_Rz6bqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090408016145-2f73lht7bhuhq25led85ctnr13dom67k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
