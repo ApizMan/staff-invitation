@@ -1,11 +1,21 @@
 package login;
 
+import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
+import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -20,11 +30,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.concurrent.Executor;
+
 public class login_mainpage extends AppCompatActivity {
     TextInputEditText editTextEmail, editTextPassword;
     Button buttonSignUp0, buttonLogin;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
+
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    ConstraintLayout mMainLayout;
 
     @Override
     public void onStart() {
@@ -41,6 +57,7 @@ public class login_mainpage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_mainpage);
+        mMainLayout = findViewById(R.id.main_layout);
 
         editTextEmail = findViewById(R.id.enterusername);
         editTextPassword = findViewById(R.id.enterpassword);
@@ -57,6 +74,47 @@ public class login_mainpage extends AppCompatActivity {
                 finish();
             }
         });
+
+        BiometricManager biometricManager=BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate()){
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                Toast.makeText(getApplicationContext(), "Device Doesn't Have Fingerprint", Toast.LENGTH_SHORT).show();
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                Toast.makeText(getApplicationContext(), "Fingerprint Not Working", Toast.LENGTH_SHORT).show();
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                Toast.makeText(getApplicationContext(), "No Fingerprint Assigned", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        Executor executor=ContextCompat.getMainExecutor(this);
+
+        biometricPrompt=new BiometricPrompt(login_mainpage.this, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(), "Biometric Success", Toast.LENGTH_SHORT).show();
+                mMainLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+        });
+
+        promptInfo=new BiometricPrompt.PromptInfo.Builder().setTitle("FKOM SDN. BHD")
+                        .setDescription("Use Fingerprint To Enter App").setDeviceCredentialAllowed(true).build();
+
+        biometricPrompt.authenticate(promptInfo);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +142,7 @@ public class login_mainpage extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
                                     Toast.makeText(login_mainpage.this,"Login Successful",Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(getApplicationContext(), dashboard.class);
+                                    Intent intent=new Intent(getApplicationContext(), dashboard.class);
                                     startActivity(intent);
                                     finish();
 
