@@ -16,6 +16,7 @@ import  com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import Admin.dashboard_admin;
 import login.dashboard;
 
 
@@ -35,7 +36,7 @@ public class viewDetail_Admin extends AppCompatActivity implements OnMapReadyCal
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(viewDetail_Admin.this, dashboard.class);
+                Intent intent = new Intent(viewDetail_Admin.this, dashboard_admin.class);
                 startActivity(intent);
             }
         });
