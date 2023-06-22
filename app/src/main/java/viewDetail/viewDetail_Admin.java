@@ -1,6 +1,9 @@
 package viewDetail;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +16,13 @@ import  com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import login.dashboard;
+
 
 public class viewDetail_Admin extends AppCompatActivity implements OnMapReadyCallback{
 
     private  GoogleMap myMap;
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,15 @@ public class viewDetail_Admin extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.view_detail_admin);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        backButton = (Button) findViewById(R.id.button_back);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(viewDetail_Admin.this, dashboard.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

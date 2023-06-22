@@ -36,6 +36,10 @@
             android:theme="@style/Theme.Staff_invitation.NoActionBar"
             android:exported="false" />
         <activity
+            android:name="viewDetail.viewDetail_User"
+            android:theme="@style/Theme.Staff_invitation.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name="login.login_mainpage"
             android:exported="true"
             android:label="Staff Invitation"

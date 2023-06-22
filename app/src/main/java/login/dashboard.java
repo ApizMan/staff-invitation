@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import viewDetail.viewDetail_Admin;
+import viewDetail.viewDetail_User;
 
 public class dashboard extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class dashboard extends AppCompatActivity {
     FirebaseUser user;
     ProgressBar progressBar;
 
-    Button viewDetailAdmin;
+    Button viewDetailUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class dashboard extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         buttonLogout = findViewById(R.id.logout);
         user = auth.getCurrentUser();
-        viewDetailAdmin = (Button) findViewById(R.id.viewDetailAdmin);
+        viewDetailUser = (Button) findViewById(R.id.viewDetailUser);
 
         if (user ==null){
             Intent intent = new Intent(getApplicationContext(), login_mainpage.class);
@@ -51,10 +52,10 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
-        viewDetailAdmin.setOnClickListener(new View.OnClickListener() {
+        viewDetailUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(dashboard.this, viewDetail_Admin.class);
+                Intent intent = new Intent(dashboard.this, viewDetail_User.class);
                 startActivity(intent);
             }
         });
