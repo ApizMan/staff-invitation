@@ -21,22 +21,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="29dp"
+        android:layout_marginBottom="1dp"
         android:text="DASHBOARD"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="99dp"
-        android:layout_height="48dp"
+        android:layout_width="101dp"
+        android:layout_height="43dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginEnd="21dp"
         android:backgroundTint="@color/gray"
         android:text="LOGOUT"
         android:textColor="@color/black"
@@ -49,6 +49,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
-            android:layout_height="448dp"
+            android:layout_height="519dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             app:cardBackgroundColor="@color/blue">
@@ -74,46 +75,14 @@
                     android:layout_height="100dp"
                     app:srcCompat="@drawable/fkom" />
 
-                <EditText
-                    android:id="@+id/editTextText4"
+                <ListView
+                    android:id="@+id/listViewDashboardUser"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:text="Name" />
-
-                <EditText
-                    android:id="@+id/editTextText5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:text="Date" />
-
-                <EditText
-                    android:id="@+id/editTextText6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:text="Time" />
-
-                <EditText
-                    android:id="@+id/editTextText7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:text="Location" />
+                    android:layout_height="360dp" />
 
                 <Button
                     android:id="@+id/viewDetailUser"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="View Detail" />
             </LinearLayout>

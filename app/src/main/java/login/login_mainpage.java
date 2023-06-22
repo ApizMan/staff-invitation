@@ -141,22 +141,31 @@ public class login_mainpage extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
 
 
+                                if (mAuth.getUid().equals("eYh3lWy2n7YjZyvx4MovK6NM5qX2")) {
+
                                     if (task.isSuccessful()) {
-                                        if (mAuth.getUid().equals("eYh3lWy2n7YjZyvx4MovK6NM5qX2")) {
+
                                             Toast.makeText(login_mainpage.this, "Login Successful", Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(getApplicationContext(), dashboard.class);
                                             startActivity(intent);
                                             finish();
-                                        } else {
-                                            Toast.makeText(login_mainpage.this, "Login Successful", Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(getApplicationContext(), dashboard_admin.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
                                     } else {
                                         Toast.makeText(login_mainpage.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
+                                } else {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(login_mainpage.this, "Login Successful", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getApplicationContext(), dashboard_admin.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(login_mainpage.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
                             }
                         });

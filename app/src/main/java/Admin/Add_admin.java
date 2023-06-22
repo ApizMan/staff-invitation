@@ -1,26 +1,20 @@
 package Admin;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.staff_invitation.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -30,6 +24,7 @@ public class Add_admin extends AppCompatActivity {
 
     EditText companyname, contactnumber, email, eventdate, eventdescription, eventlocation, eventname, eventtime;
     Button btnAdd, btnBack;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +54,8 @@ public class Add_admin extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(Add_admin.this,dashboard_admin.class);
+                startActivity(intent);
             }
         });
     }
@@ -81,6 +77,7 @@ public class Add_admin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(Add_admin.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+                        vibrateDevice();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -101,5 +98,10 @@ public class Add_admin extends AppCompatActivity {
         email.setText("");
         companyname.setText("");
         contactnumber.setText("");
+    }
+
+    private void vibrateDevice() {
+        // Vibrate for 500 milliseconds (0.5 seconds)
+        vibrator.vibrate(500);
     }
 }

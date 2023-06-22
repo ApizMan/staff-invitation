@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import  com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,13 @@ public class viewDetail_User extends AppCompatActivity implements OnMapReadyCall
     private  GoogleMap myMap;
     Button backButton, acceptButton, rejectButton;
 
+    ListView myListView;
+
+    ArrayList<String> myArrayList = new ArrayList<>();
+
+    DatabaseReference mRef;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +84,43 @@ public class viewDetail_User extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
+        ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(viewDetail_User.this, android.R.layout.simple_list_item_1, myArrayList);
+
+        myListView = (ListView) findViewById(R.id.listViewUser);
+
+        myListView.setAdapter(myArrayAdapter);
+
+        mRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://login-2e102-default-rtdb.firebaseio.com/events/-NYYtveEYJwpCAcZW5LB");
+
+        mRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String value = snapshot.getValue(String.class);
+                myArrayList.add(value);
+                myArrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                myArrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

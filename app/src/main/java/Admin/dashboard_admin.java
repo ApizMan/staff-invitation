@@ -1,17 +1,15 @@
 package Admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.staff_invitation.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +24,7 @@ public class dashboard_admin extends AppCompatActivity  {
 
     FloatingActionButton floatingActionButton;
 
-    Button buttonLogout;
+    Button buttonLogout, buttonViewDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,20 +45,21 @@ public class dashboard_admin extends AppCompatActivity  {
 
         buttonLogout = findViewById(R.id.logout);
 
+        buttonViewDetail = findViewById(R.id.viewDetailAdmin);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), viewDetail_Admin.class));
+                Intent intent = new Intent(dashboard_admin.this,Add_admin.class);
+                startActivity(intent);
             }
         });
 
-        buttonLogout.setOnClickListener(new View.OnClickListener() {
+        buttonViewDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), login_mainpage.class);
+                Intent intent = new Intent(dashboard_admin.this, viewDetail_Admin.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
