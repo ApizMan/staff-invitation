@@ -3,6 +3,7 @@ package Admin;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,17 +36,21 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
      *
      * @param options
      */
+
     public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options) {
         super(options);
     }
+
+    Vibrator vibrator;
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull MainModel model) {
         holder.eventname.setText(model.getEventname());
         holder.eventdate.setText(model.getEventdate());
         holder.eventtime.setText(model.getEventtime());
-        holder.eventlocation.setText(model.eventlocation);
+        holder.eventlocation.setText(model.getEventlocation());
 
+        //This is an action of button edit
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +103,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(holder.eventname.getContext(), "Data Updated Successfully", Toast.LENGTH_SHORT).show();
                                         dialogPlus.dismiss();
+                                        vibrateDevice();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -112,6 +118,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
             }
         });
 
+        //This is an action of button delete
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +131,8 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseDatabase.getInstance().getReference().child("events")
                                 .child(getRef(position).getKey()).removeValue();
+
+                        vibrateDevice();
                     }
                 });
 
@@ -146,27 +155,31 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
         return null;
     }
 
-class myViewHolder extends RecyclerView.ViewHolder{
-    CircleImageView img;
-    TextView companyname, contactnumber, email, eventdate, eventdescription, eventlocation, eventname, eventtime;
+    class myViewHolder extends RecyclerView.ViewHolder{
+        CircleImageView img;
+        TextView companyname, contactnumber, email, eventdate, eventdescription, eventlocation, eventname, eventtime;
 
-    Button btnEdit,btnDelete;
+        Button btnEdit,btnDelete;
 
-    public myViewHolder(@NonNull View itemView) {
-        super(itemView);
+        public myViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        img = (CircleImageView)itemView.findViewById(R.id.img1);
-        eventname = (TextView)itemView.findViewById(R.id.txtEvent);
-        eventdate = (TextView)itemView.findViewById(R.id.txtDate);
-        eventtime = (TextView)itemView.findViewById(R.id.txtTime);
-        eventlocation = (TextView)itemView.findViewById(R.id.txtlocation);
-        eventdescription = (TextView)itemView.findViewById(R.id.txtEventDescription);
-        email = (TextView)itemView.findViewById(R.id.txtEmail);
-        contactnumber = (TextView)itemView.findViewById(R.id.txtContact);
-        companyname = (TextView)itemView.findViewById(R.id.txtCompany);
+            img = (CircleImageView)itemView.findViewById(R.id.img1);
+            eventname = (TextView)itemView.findViewById(R.id.txtEvent);
+            eventdate = (TextView)itemView.findViewById(R.id.txtDate);
+            eventtime = (TextView)itemView.findViewById(R.id.txtTime);
+            eventlocation = (TextView)itemView.findViewById(R.id.txtlocation);
+            eventdescription = (TextView)itemView.findViewById(R.id.txtEventDescription);
+            email = (TextView)itemView.findViewById(R.id.txtEmail);
+            contactnumber = (TextView)itemView.findViewById(R.id.txtContact);
+            companyname = (TextView)itemView.findViewById(R.id.txtCompany);
 
             btnEdit = (Button)itemView.findViewById(R.id.btnEdit);
             btnDelete = (Button)itemView.findViewById(R.id.btnDelete);
+        }
     }
+    private void vibrateDevice() {
+        // Vibrate for 500 milliseconds (0.5 seconds)
+        vibrator.vibrate(500);
     }
 }

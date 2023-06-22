@@ -1,16 +1,14 @@
 package Admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.staff_invitation.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,7 +39,9 @@ public class dashboard_admin extends AppCompatActivity  {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Add_admin.class));
+//              startActivity(new Intent(getApplicationContext(), Add_admin.class));
+                Intent intent = new Intent(dashboard_admin.this,Add_admin.class);
+                startActivity(intent);
             }
         });
     }
