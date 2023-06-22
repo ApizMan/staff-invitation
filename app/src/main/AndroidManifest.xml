@@ -20,12 +20,22 @@
             android:theme="@style/Theme.Staff_invitation.NoActionBar"
             android:exported="false" />
         <activity
+            android:name="Admin.dashboard_admin"
+            android:theme="@style/Theme.Staff_invitation.NoActionBar"
+            android:exported="true" />
+        <activity
             android:name="login.reset_page"
             android:theme="@style/Theme.Staff_invitation.NoActionBar"
             android:exported="false" />
         <activity
             android:name="login.signup_page"
             android:theme="@style/Theme.Staff_invitation.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".CreateEvent"
+            android:exported="false" />
+        <activity
+            android:name=".EditEvent"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -44,6 +54,7 @@
             android:exported="true"
             android:label="Staff Invitation"
             android:theme="@style/Theme.Staff_invitation.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.staff_invitation.MainActivity;
 import com.example.staff_invitation.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +18,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import Admin.dashboard_admin;
 
 public class login_mainpage extends AppCompatActivity {
     TextInputEditText editTextEmail, editTextPassword;
@@ -90,8 +91,10 @@ public class login_mainpage extends AppCompatActivity {
                                             startActivity(intent);
                                             finish();
                                         } else {
-                                            Toast.makeText(login_mainpage.this, "Try Login as User.",
-                                                    Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(login_mainpage.this, "Login Successful", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(getApplicationContext(), dashboard_admin.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     } else {
                                         Toast.makeText(login_mainpage.this, "Authentication failed.",

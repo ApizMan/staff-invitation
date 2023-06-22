@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import viewDetail.viewDetail_Admin;
 import viewDetail.viewDetail_User;
+import Admin.dashboard_admin;
 
 public class dashboard extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class dashboard extends AppCompatActivity {
     ProgressBar progressBar;
 
     Button viewDetailUser;
+
+    Button list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
